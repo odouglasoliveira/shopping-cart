@@ -23,9 +23,6 @@ describe('Teste a função fetchProductsList',  () => {
   });
 
   it('testa se retorna um erro quando a função é chamada sem parametro', async () => {
-    try {
-      await fetchProductsList();
-    } catch (error) {
-      expect(error.message).toMatch('Termo de busca não informado');  
-    }});
+    await expect(fetchProductsList()).rejects.toThrow('Termo de busca não informado');
+  });
 });
