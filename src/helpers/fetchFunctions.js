@@ -8,6 +8,6 @@ export const fetchProductsList = async (item) => {
     const data = await response.json();
     return data.results;
   } catch (error) {
-    throw new Error('Termo de busca não informado');
+    return new Error('Termo de busca não informado');
   }
 };
