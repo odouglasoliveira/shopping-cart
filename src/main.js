@@ -1,6 +1,7 @@
+import { getSavedCartIDs } from './helpers/cartFunctions';
 import { searchCep } from './helpers/cepFunctions';
 import { fetchProduct, fetchProductsList } from './helpers/fetchFunctions';
-import { createProductElement } from './helpers/shopFunctions';
+import { createCartProductElement, createProductElement } from './helpers/shopFunctions';
 import './style.css';
 
 const display = document.querySelector('.products');
@@ -38,3 +39,14 @@ const listProducts = async () => {
   }
 };
 listProducts();
+
+const restoreProducts = async () => {
+  const productContainer = document.querySelector('.cart__products');
+  const products = getSavedCartIDs().map((product) => fetchProduct(product));
+  const allProducts = await Promise.all(products);
+  allProducts.forEach((product) => {
+    productContainer.appendChild(createCartProductElement(product));
+  });
+};
+
+restoreProducts();
