@@ -16,7 +16,7 @@ export const searchCep = async () => {
   try {
     const data = await getAddress(cep);
     const { address, district, city, state } = data;
-    const message = `${address}, ${district}, ${city}, ${state}`;
+    const message = `${address} - ${district} - ${city} - ${state}`;
     addressDisplay.innerHTML = message;
   } catch (error) {
     addressDisplay.innerHTML = 'CEP não encontrado';
