@@ -1,3 +1,6 @@
+import updatePrice from './updateCost';
+import { fetchProduct } from './fetchFunctions';
+
 /**
  * Função que retorna todos os itens do carrinho salvos no localStorage.
  * @returns {Array} Itens de ids salvos do carrinho ou array vazio.
@@ -22,10 +25,21 @@ export const saveCartID = (id) => {
 /**
  * Função que remove um product do carrinho.
  * @param {string} id - ID do product a ser removido.
- */
+*/
+export const subtractPrice = async (id) => {
+  const totalPrice = localStorage.getItem('totalPrice');
+  let totalNumber = +totalPrice;
+  const product = await fetchProduct(id);
+  const { price } = product;
+  totalNumber -= price;
+  localStorage.setItem('totalPrice', totalNumber);
+  updatePrice();
+  return totalNumber;
+};
+
 export const removeCartID = (id) => {
   if (!id) throw new Error('Você deve fornecer um ID');
-
+  subtractPrice(id);
   const cartProducts = [...getSavedCartIDs()];
   const indexProduct = cartProducts.indexOf(id);
   cartProducts.splice(indexProduct, 1);

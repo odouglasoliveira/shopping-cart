@@ -1,5 +1,6 @@
 import { removeCartID, saveCartID } from './cartFunctions';
 import { fetchProduct } from './fetchFunctions';
+import updatePrice from './updateCost';
 
 // Esses comentários que estão antes de cada uma das funções são chamados de JSdoc,
 // experimente passar o mouse sobre o nome das funções e verá que elas possuem descrições!
@@ -100,7 +101,18 @@ export const createCartProductElement = ({ id, title, price, pictures }) => {
  * @param {string} product.thumbnail - URL da imagem do produto.
  * @param {number} product.price - Preço do produto.
  * @returns {Element} Elemento de produto.
- */
+*/
+
+export const getProductPrice = async (id) => {
+  const totalPrice = localStorage.getItem('totalPrice') || 0;
+  let number = +totalPrice;
+  const product = await fetchProduct(id);
+  number += product.price;
+  localStorage.setItem('totalPrice', number);
+  updatePrice();
+  return number;
+};
+
 export const createProductElement = ({ id, title, thumbnail, price }) => {
   const section = document.createElement('section');
   section.className = 'product';
@@ -124,6 +136,8 @@ export const createProductElement = ({ id, title, thumbnail, price }) => {
   );
   cartButton.addEventListener('click', async () => {
     saveCartID(id);
+    getProductPrice(id);
+    console.log(await getProductPrice(id));
     const productContainer = document.querySelector('.cart__products');
     const product = createCartProductElement(await fetchProduct(id));
     productContainer.appendChild(product);

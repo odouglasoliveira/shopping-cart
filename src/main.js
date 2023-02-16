@@ -2,6 +2,7 @@ import { getSavedCartIDs } from './helpers/cartFunctions';
 import { searchCep } from './helpers/cepFunctions';
 import { fetchProduct, fetchProductsList } from './helpers/fetchFunctions';
 import { createCartProductElement, createProductElement } from './helpers/shopFunctions';
+import updatePrice from './helpers/updateCost';
 import './style.css';
 
 const display = document.querySelector('.products');
@@ -50,3 +51,4 @@ const restoreProducts = async () => {
 };
 
 restoreProducts();
+updatePrice();
