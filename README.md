@@ -32,4 +32,4 @@ Este é um projeto de um site que simula uma loja online. Ao acessar o site, ele
 
 5. O carrinho de compras será atualizado automaticamente, exibindo os produtos adicionados, o subtotal e o botão "Remover do Carrinho" para cada produto.
 
-6. Caso deseje visualizar o endereço correspondente ao CEP, digite o CEP desejado no campo específico e clique no botão "Buscar Endereço".
+6. Caso deseje visualizar o endereço correspondente ao CEP, digite o CEP desejado no campo específico e clique no botão "Buscar CEP".
