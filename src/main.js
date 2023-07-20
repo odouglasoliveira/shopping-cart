@@ -30,8 +30,12 @@ const showError = () => {
 const listProducts = async () => {
   try {
     const products = await fetchProductsList('computador');
+    const filteredProducts = products.filter((product) => product.id !== 'MLB3382261009');
+    filteredProducts.forEach((product) => {
+      product.price = product.price.toFixed(2);
+    });
     cleanLoading();
-    products.forEach((product) => {
+    filteredProducts.forEach((product) => {
       display.appendChild(createProductElement(product));
     });
   } catch (error) {
@@ -43,9 +47,9 @@ listProducts();
 
 const restoreProducts = async () => {
   const productContainer = document.querySelector('.cart__products');
-  const products = getSavedCartIDs().map((product) => fetchProduct(product));
-  const allProducts = await Promise.all(products);
-  allProducts.forEach((product) => {
+  const promises = getSavedCartIDs().map((product) => fetchProduct(product));
+  const products = await Promise.all(promises);
+  products.forEach((product) => {
     productContainer.appendChild(createCartProductElement(product));
   });
 };
