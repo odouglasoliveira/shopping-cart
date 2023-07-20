@@ -22,7 +22,7 @@ Este é um projeto de um site que simula uma loja online. Ao acessar o site, ele
 
 1. Clone o repositório do projeto para o seu ambiente local:
 
-git clone https://github.com/odouglasoliveira/shopping-cart.git
+ `git clone https://github.com/odouglasoliveira/shopping-cart.git`
 
 2. Abra o arquivo `index.html` em seu navegador de preferência.
 
